@@ -1,0 +1,16 @@
+{
+  "pages": [
+    "pages/submit/submit",
+    "pages/list/list",
+    "pages/detail/detail",
+    "pages/statistics/statistics"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#A74830",
+    "navigationBarTitleText": "橡树湾·邻里",
+    "navigationBarTextStyle": "white"
+  },
+  "sitemapLocation": "sitemap.json",
+  "cloud": true
+}

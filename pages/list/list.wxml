@@ -1,0 +1,97 @@
+<view class="list-page">
+  <!-- Tab切换 -->
+  <view class="tab-container">
+    <view class="tab {{activeTab === 'mine' ? 'active' : ''}}" bindtap="switchTab" data-tab="mine">
+      我的问题
+    </view>
+    <view class="tab {{activeTab === 'all' ? 'active' : ''}}" bindtap="switchTab" data-tab="all">
+      小区所有问题
+    </view>
+  </view>
+
+  <!-- 状态筛选 -->
+  <view class="status-filter">
+    <view
+      wx:for="{{statusList}}"
+      wx:key="value"
+      class="status-item {{activeStatus === item.value ? 'active' : ''}}"
+      bindtap="filterByStatus"
+      data-status="{{item.value}}"
+    >
+      {{item.label}}
+    </view>
+  </view>
+
+  <!-- 问题列表 -->
+  <view class="issue-list">
+    <view
+      wx:for="{{issueList}}"
+      wx:key="_id"
+      class="issue-card"
+      bindtap="goToDetail"
+      data-id="{{item._id}}"
+    >
+      <view class="issue-header">
+        <view class="issue-category">{{item.categoryText}}</view>
+        <view class="issue-status {{item.statusClass}}">{{item.statusText}}</view>
+      </view>
+
+      <view class="issue-description">{{item.description}}</view>
+
+      <view class="issue-images" wx:if="{{item.images.length > 0}}">
+        <image
+          wx:for="{{item.images}}"
+          wx:for-item="img"
+          wx:for-index="imgIndex"
+          wx:key="imgIndex"
+          wx:if="{{imgIndex < 3}}"
+          src="{{img}}"
+          mode="aspectFill"
+          class="issue-image"
+        ></image>
+      </view>
+
+      <view class="issue-footer">
+        <view class="issue-location">{{item.location}}</view>
+        <view class="issue-time">{{item.createTimeText}}</view>
+      </view>
+    </view>
+
+    <!-- 加载更多 -->
+    <view class="load-more" wx:if="{{hasMore && loading}}">
+      <text>加载中...</text>
+    </view>
+
+    <!-- 没有更多 -->
+    <view class="no-more" wx:if="{{!hasMore && issueList.length > 0}}">
+      <text>没有更多了</text>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{issueList.length === 0 && !loading}}">
+      <text>暂无问题</text>
+    </view>
+  </view>
+
+  <!-- 底部导航 -->
+  <view class="bottom-nav">
+    <view class="nav-item" bindtap="goToSubmit">
+      <view class="nav-icon">
+        <text class="icon-text">✎</text>
+      </view>
+      <text class="nav-text">提交问题</text>
+    </view>
+    <view class="nav-item active" bindtap="goToList">
+      <view class="nav-icon">
+        <text class="icon-text">☰</text>
+      </view>
+      <text class="nav-text">我的反馈</text>
+    </view>
+    <view class="nav-item" bindtap="goToStatistics">
+      <view class="nav-icon">
+        <text class="icon-text">▦</text>
+      </view>
+      <text class="nav-text">数据统计</text>
+    </view>
+  </view>
+</view>

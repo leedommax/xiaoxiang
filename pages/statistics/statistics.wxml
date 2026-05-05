@@ -1,0 +1,90 @@
+<view class="statistics-page">
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="page-loading">
+    <text>加载中...</text>
+  </view>
+
+  <view wx:if="{{!loading}}">
+    <!-- 总览统计 -->
+    <view class="section-title">问题总览</view>
+    <view class="overview-grid">
+      <view class="overview-item">
+        <view class="overview-value">{{overview.total}}</view>
+        <view class="overview-label">总问题数</view>
+      </view>
+      <view class="overview-item">
+        <view class="overview-value">{{overview.monthTotal}}</view>
+        <view class="overview-label">本月新增</view>
+      </view>
+      <view class="overview-item highlight-pending">
+        <view class="overview-value">{{overview.pending}}</view>
+        <view class="overview-label">待处理</view>
+      </view>
+      <view class="overview-item highlight-processing">
+        <view class="overview-value">{{overview.processing}}</view>
+        <view class="overview-label">处理中</view>
+      </view>
+      <view class="overview-item highlight-completed">
+        <view class="overview-value">{{overview.completed}}</view>
+        <view class="overview-label">已完成</view>
+      </view>
+      <view class="overview-item highlight-rate">
+        <view class="overview-value">{{overview.processRate}}%</view>
+        <view class="overview-label">处理率</view>
+      </view>
+    </view>
+
+    <!-- 分类统计 -->
+    <view class="section-title">分类统计</view>
+    <view class="category-list">
+      <view wx:if="{{categoryStats.length === 0}}" class="empty-hint">暂无数据</view>
+      <view class="category-bar-item" wx:for="{{categoryStats}}" wx:key="category">
+        <view class="category-bar-header">
+          <text class="category-bar-label">{{item.categoryText}}</text>
+          <text class="category-bar-count">{{item.count}}</text>
+        </view>
+        <view class="category-bar-track">
+          <view class="category-bar-fill" style="width: {{overview.total > 0 ? (item.count / overview.total * 100) : 0}}%"></view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 近7天趋势 -->
+    <view class="section-title">近7天趋势</view>
+    <view class="trend-chart">
+      <view class="trend-bars" wx:if="{{trendData.length > 0}}">
+        <view class="trend-bar-group" wx:for="{{trendData}}" wx:key="date">
+          <view class="trend-bar-wrapper">
+            <view class="trend-bar" style="height: {{item.count > 0 ? (item.count / maxCount * 96) : 2}}px"></view>
+          </view>
+          <text class="trend-date">{{item.date}}</text>
+        </view>
+      </view>
+      <view class="trend-empty" wx:else>
+        <text>暂无数据</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部导航 -->
+  <view class="bottom-nav">
+    <view class="nav-item" bindtap="goToSubmit">
+      <view class="nav-icon">
+        <text class="icon-text">✎</text>
+      </view>
+      <text class="nav-text">提交问题</text>
+    </view>
+    <view class="nav-item" bindtap="goToList">
+      <view class="nav-icon">
+        <text class="icon-text">☰</text>
+      </view>
+      <text class="nav-text">我的反馈</text>
+    </view>
+    <view class="nav-item active" bindtap="goToStatistics">
+      <view class="nav-icon">
+        <text class="icon-text">▦</text>
+      </view>
+      <text class="nav-text">数据统计</text>
+    </view>
+  </view>
+</view>

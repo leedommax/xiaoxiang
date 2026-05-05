@@ -1,0 +1,106 @@
+<view class="submit-page">
+  <!-- 问题分类 -->
+  <view class="form-item card">
+    <view class="section-title">问题分类</view>
+    <view class="category-list">
+      <view
+        wx:for="{{categories}}"
+        wx:key="value"
+        class="category-item {{selectedCategory === item.value ? 'active' : ''}}"
+        bindtap="selectCategory"
+        data-value="{{item.value}}"
+      >
+        {{item.label}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 问题描述 -->
+  <view class="form-item card">
+    <view class="section-title">问题描述</view>
+    <textarea
+      class="description-input"
+      value="{{description}}"
+      placeholder="请详细描述问题情况(必填,最多500字)"
+      maxlength="500"
+      bindinput="onDescriptionInput"
+    ></textarea>
+    <view class="word-count">{{description.length}}/500</view>
+  </view>
+
+  <!-- 图片上传 -->
+  <view class="form-item card">
+    <view class="section-title">上传图片</view>
+    <view class="uploader-container">
+      <view class="image-list">
+        <view class="image-item" wx:for="{{imageList}}" wx:key="index">
+          <image src="{{item}}" mode="aspectFill" bindtap="previewImage" data-url="{{item}}"></image>
+          <view class="delete-btn" bindtap="deleteImage" data-index="{{index}}">×</view>
+        </view>
+        <view class="upload-btn" wx:if="{{imageList.length < 9}}" bindtap="chooseImage">
+          <text class="plus">+</text>
+          <text class="text">添加图片</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 位置信息 -->
+  <view class="form-item card">
+    <view class="section-title">位置信息</view>
+    <input
+      class="location-input"
+      value="{{location}}"
+      placeholder="请输入具体位置,如:3号楼1单元门口"
+      bindinput="onLocationInput"
+    />
+  </view>
+
+  <!-- 紧急程度 -->
+  <view class="form-item card">
+    <view class="section-title">紧急程度</view>
+    <view class="urgency-list">
+      <view
+        class="urgency-item {{urgency === 0 ? 'active' : ''}}"
+        bindtap="selectUrgency"
+        data-urgency="{{0}}"
+      >
+        普通
+      </view>
+      <view
+        class="urgency-item {{urgency === 1 ? 'active' : ''}}"
+        bindtap="selectUrgency"
+        data-urgency="{{1}}"
+      >
+        紧急
+      </view>
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <view class="submit-btn-container">
+    <button class="submit-btn" bindtap="submit">提交</button>
+  </view>
+
+  <!-- 底部导航 -->
+  <view class="bottom-nav">
+    <view class="nav-item active" bindtap="goToSubmit">
+      <view class="nav-icon">
+        <text class="icon-text">✎</text>
+      </view>
+      <text class="nav-text">提交问题</text>
+    </view>
+    <view class="nav-item" bindtap="goToList">
+      <view class="nav-icon">
+        <text class="icon-text">☰</text>
+      </view>
+      <text class="nav-text">我的反馈</text>
+    </view>
+    <view class="nav-item" bindtap="goToStatistics">
+      <view class="nav-icon">
+        <text class="icon-text">▦</text>
+      </view>
+      <text class="nav-text">数据统计</text>
+    </view>
+  </view>
+</view>

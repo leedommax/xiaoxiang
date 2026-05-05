@@ -1,0 +1,67 @@
+<view class="detail-page">
+  <view wx:if="{{loading}}" class="page-loading">
+    <text>加载中...</text>
+  </view>
+
+  <view wx:if="{{loadError}}" class="page-error">
+    <text class="error-text">加载失败</text>
+    <view class="retry-btn" bindtap="retryLoad">点击重试</view>
+  </view>
+
+  <view wx:if="{{!loading && !loadError && issue}}">
+    <!-- 问题状态 -->
+    <view class="status-card card">
+      <view class="status-row">
+        <view class="status-label">当前状态</view>
+        <view class="status-value {{issue.statusClass}}">{{issue.statusText}}</view>
+      </view>
+      <view class="status-row" wx:if="{{issue.urgency === 1}}">
+        <view class="status-label">紧急程度</view>
+        <view class="status-value urgency">紧急</view>
+      </view>
+    </view>
+
+    <!-- 问题信息 -->
+    <view class="info-card card">
+      <view class="info-row">
+        <view class="info-label">问题分类</view>
+        <view class="info-value">{{issue.categoryText}}</view>
+      </view>
+
+      <view class="info-row">
+        <view class="info-label">问题描述</view>
+        <view class="info-value description">{{issue.description}}</view>
+      </view>
+
+      <view class="info-row" wx:if="{{issue.images.length > 0}}">
+        <view class="info-label">问题图片</view>
+        <view class="image-list">
+          <image
+            wx:for="{{issue.images}}"
+            wx:key="index"
+            src="{{item}}"
+            mode="aspectFill"
+            class="info-image"
+            bindtap="previewImage"
+            data-url="{{item}}"
+          ></image>
+        </view>
+      </view>
+
+      <view class="info-row">
+        <view class="info-label">位置信息</view>
+        <view class="info-value">{{issue.location}}</view>
+      </view>
+
+      <view class="info-row">
+        <view class="info-label">提交时间</view>
+        <view class="info-value">{{issue.createTimeText}}</view>
+      </view>
+
+      <view class="info-row" wx:if="{{issue.userName}}">
+        <view class="info-label">提交人</view>
+        <view class="info-value">{{issue.userName}}</view>
+      </view>
+    </view>
+  </view>
+</view>

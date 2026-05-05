@@ -1,0 +1,128 @@
+.detail-page {
+  padding: 0 16px 40px 16px;
+  background-color: #F5F0E6;
+  min-height: 100vh;
+}
+
+.page-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-size: 14px;
+  color: #9B8B7A;
+}
+
+.page-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.error-text {
+  font-size: 14px;
+  color: #9B8B7A;
+  margin-bottom: 16px;
+}
+
+.retry-btn {
+  padding: 8px 24px;
+  background-color: #A74830;
+  color: #FFF9F3;
+  border-radius: 12px;
+  font-size: 13px;
+}
+
+.card {
+  background-color: #FFF9F3;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 8px;
+  margin-top: 8px;
+  border: 1px solid rgba(167, 72, 48, 0.08);
+  box-shadow: 0 2px 12px rgba(167, 72, 48, 0.04);
+}
+
+/* 状态卡片 */
+.status-card {
+  background-color: #FFF9F3;
+  margin-top: 16px;
+}
+
+.status-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.status-row:last-child {
+  margin-bottom: 0;
+}
+
+.status-label {
+  font-size: 14px;
+  color: #6B5B4F;
+  letter-spacing: 0.5px;
+}
+
+.status-value {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.status-value.urgency {
+  background-color: #A74830;
+  color: #FFF9F3;
+}
+
+/* 问题信息卡片 */
+.info-card {
+  background-color: #FFF9F3;
+}
+
+.info-row {
+  margin-bottom: 16px;
+}
+
+.info-row:last-child {
+  margin-bottom: 0;
+}
+
+.info-label {
+  font-size: 13px;
+  color: #9B8B7A;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  font-size: 14px;
+  color: #3D3028;
+  line-height: 1.6;
+}
+
+.info-value.description {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* 图片列表 */
+.image-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.info-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid rgba(167, 72, 48, 0.12);
+}

@@ -1,0 +1,57 @@
+/**app.wxss**/
+page {
+  background-color: #F5F0E6;
+  font-family: 'Source Han Sans CN', 'Alibaba PuHuiTi', PingFang SC, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  color: #3D3028;
+  height: 100%;
+}
+
+.container {
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+/* 公共样式 */
+.card {
+  background-color: #FFF9F3;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 8px;
+  border: 1px solid rgba(167, 72, 48, 0.08);
+  box-shadow: 0 2px 12px rgba(167, 72, 48, 0.04);
+}
+
+.section-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: #3D3028;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+
+.input-placeholder {
+  color: #9B8B7A;
+  font-size: 14px;
+}
+
+/* 状态标签颜色 - 低饱和暖色调 */
+.status-pending {
+  background-color: #F5E6D8;
+  color: #B8825A;
+}
+
+.status-processing {
+  background-color: #E8F0E6;
+  color: #6B8E6B;
+}
+
+.status-completed {
+  background-color: #E6F0E8;
+  color: #5A8B5A;
+}
+
+.status-closed {
+  background-color: #EDE8E3;
+  color: #8B7E74;
+}

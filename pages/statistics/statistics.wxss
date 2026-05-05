@@ -1,0 +1,239 @@
+.statistics-page {
+  padding: 0 16px 140px 16px;
+  background-color: #F5F0E6;
+  min-height: 100vh;
+  position: relative;
+}
+
+.page-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-size: 14px;
+  color: #9B8B7A;
+}
+
+.section-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: #3D3028;
+  margin-bottom: 12px;
+  margin-top: 20px;
+  letter-spacing: 0.5px;
+}
+
+/* 总览统计 */
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.overview-item {
+  background-color: #FFF9F3;
+  border-radius: 10px;
+  padding: 16px 12px;
+  text-align: center;
+  border: 1px solid rgba(167, 72, 48, 0.08);
+  box-shadow: 0 2px 12px rgba(167, 72, 48, 0.04);
+}
+
+.overview-value {
+  font-size: 24px;
+  font-weight: 600;
+  color: #3D3028;
+  line-height: 1.2;
+}
+
+.overview-label {
+  font-size: 11px;
+  color: #9B8B7A;
+  margin-top: 6px;
+  letter-spacing: 0.3px;
+}
+
+.overview-item.highlight-pending .overview-value {
+  color: #B8825A;
+}
+
+.overview-item.highlight-processing .overview-value {
+  color: #6B8E6B;
+}
+
+.overview-item.highlight-completed .overview-value {
+  color: #5A8B5A;
+}
+
+.overview-item.highlight-rate .overview-value {
+  color: #A74830;
+}
+
+/* 分类统计 */
+.category-list {
+  background-color: #FFF9F3;
+  border-radius: 10px;
+  padding: 16px;
+  border: 1px solid rgba(167, 72, 48, 0.08);
+  box-shadow: 0 2px 12px rgba(167, 72, 48, 0.04);
+}
+
+.category-bar-item {
+  margin-bottom: 14px;
+}
+
+.category-bar-item:last-child {
+  margin-bottom: 0;
+}
+
+.category-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.category-bar-label {
+  font-size: 13px;
+  color: #3D3028;
+  letter-spacing: 0.3px;
+}
+
+.category-bar-count {
+  font-size: 13px;
+  color: #9B8B7A;
+  font-weight: 500;
+}
+
+.category-bar-track {
+  height: 8px;
+  background-color: #F5F0E6;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.category-bar-fill {
+  height: 100%;
+  background: linear-gradient(135deg, #A74830 0%, #C46A50 100%);
+  border-radius: 4px;
+  min-width: 4px;
+  transition: width 0.6s ease;
+}
+
+/* 趋势图表 */
+.trend-chart {
+  background-color: #FFF9F3;
+  border-radius: 10px;
+  padding: 16px;
+  border: 1px solid rgba(167, 72, 48, 0.08);
+  box-shadow: 0 2px 12px rgba(167, 72, 48, 0.04);
+}
+
+.trend-bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  height: 120px;
+  padding-bottom: 24px;
+  position: relative;
+}
+
+.trend-bar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.trend-bar-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 96px;
+}
+
+.trend-bar {
+  width: 20px;
+  background: linear-gradient(180deg, #A74830 0%, #C46A50 100%);
+  border-radius: 4px 4px 0 0;
+  min-height: 2px;
+  transition: height 0.6s ease;
+}
+
+.trend-date {
+  font-size: 10px;
+  color: #9B8B7A;
+  margin-top: 6px;
+}
+
+.trend-empty {
+  text-align: center;
+  padding: 40px 0;
+  font-size: 13px;
+  color: #9B8B7A;
+}
+
+/* 底部导航 */
+.bottom-nav {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100%;
+  height: 64px;
+  background-color: #FFF9F3;
+  display: flex;
+  box-shadow: 0 -2px 16px rgba(167, 72, 48, 0.06);
+  border-top: 1px solid rgba(167, 72, 48, 0.08);
+  z-index: 9999;
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #9B8B7A;
+  position: relative;
+  padding: 8px 0;
+}
+
+.nav-item.active {
+  color: #A74830;
+}
+
+.nav-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #F5F0E6;
+  margin-bottom: 4px;
+  transition: all 0.3s ease;
+}
+
+.nav-item.active .nav-icon {
+  background-color: #A74830;
+}
+
+.icon-text {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.nav-item.active .icon-text {
+  color: #FFF9F3;
+}
+
+.nav-text {
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}

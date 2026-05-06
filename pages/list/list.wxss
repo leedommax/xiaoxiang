@@ -146,6 +146,27 @@
   flex-shrink: 0;
 }
 
+/* 处理备注 */
+.issue-remark {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(167, 72, 48, 0.15);
+}
+
+.issue-remark-label {
+  font-size: 12px;
+  color: #9B8B7A;
+  margin-bottom: 4px;
+}
+
+.issue-remark-text {
+  font-size: 13px;
+  color: #3D3028;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
 /* 加载更多 */
 .load-more {
   text-align: center;

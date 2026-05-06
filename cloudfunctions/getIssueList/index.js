@@ -57,7 +57,8 @@ exports.main = async (event, context) => {
         location: true,
         urgency: true,
         status: true,
-        createTime: true
+        createTime: true,
+        remark: true
       })
       .get()
 

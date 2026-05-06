@@ -99,14 +99,14 @@ Page({
 
   // 跳转到提交页
   goToSubmit() {
-    wx.reLaunch({
+    wx.redirectTo({
       url: '/pages/submit/submit'
     });
   },
 
   // 跳转到列表页
   goToList() {
-    wx.reLaunch({
+    wx.redirectTo({
       url: '/pages/list/list'
     });
   },

@@ -5,7 +5,9 @@ Page({
     issueId: '',
     issue: null,
     loading: true,
-    loadError: false
+    loadError: false,
+    remarkInput: '',
+    submitting: false
   },
 
   onLoad(options) {
@@ -68,5 +70,47 @@ Page({
       current: url,
       urls: urls
     });
+  },
+
+  // 备注输入
+  onRemarkInput(e) {
+    this.setData({ remarkInput: e.detail.value });
+  },
+
+  // 确认处理
+  async handleProcess() {
+    const remark = this.data.remarkInput.trim();
+    if (!remark) {
+      wx.showToast({ title: '请填写处理备注', icon: 'none' });
+      return;
+    }
+    if (this.data.submitting) return;
+    this.setData({ submitting: true });
+
+    try {
+      const res = await wx.cloud.callFunction({
+        name: 'updateIssueStatus',
+        data: {
+          issueId: this.data.issueId,
+          remark: remark
+        }
+      });
+
+      if (res.result && res.result.errMsg === 'cloud.callFunction:ok') {
+        wx.showToast({ title: '处理成功', icon: 'success' });
+        this.setData({ remarkInput: '' });
+        this.loadDetail();
+      } else {
+        wx.showToast({
+          title: res.result.errMsg || '处理失败',
+          icon: 'none'
+        });
+      }
+    } catch (err) {
+      console.error('处理失败', err);
+      wx.showToast({ title: '处理失败，请重试', icon: 'none' });
+    } finally {
+      this.setData({ submitting: false });
+    }
   }
 });

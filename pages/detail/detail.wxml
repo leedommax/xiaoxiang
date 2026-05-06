@@ -63,5 +63,30 @@
         <view class="info-value">{{issue.userName}}</view>
       </view>
     </view>
+
+    <!-- 已处理操作区域 -->
+    <view class="action-card card" wx:if="{{issue.status === 0}}">
+      <view class="info-label">处理备注</view>
+      <textarea
+        class="remark-textarea"
+        placeholder="请填写处理备注"
+        maxlength="500"
+        value="{{remarkInput}}"
+        bindinput="onRemarkInput"
+      ></textarea>
+      <view class="action-btn-wrapper">
+        <view class="action-btn {{submitting ? 'disabled' : ''}}" bindtap="handleProcess">
+          {{submitting ? '提交中...' : '确认处理'}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 已处理信息 -->
+    <view class="info-card card" wx:if="{{issue.status === 2 && issue.remark}}">
+      <view class="info-row">
+        <view class="info-label">处理备注</view>
+        <view class="info-value description">{{issue.remark}}</view>
+      </view>
+    </view>
   </view>
 </view>

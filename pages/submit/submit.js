@@ -191,7 +191,7 @@ Page({
 
       // 提交成功后跳转到列表页
       setTimeout(() => {
-        wx.reLaunch({
+        wx.redirectTo({
           url: '/pages/list/list'
         });
       }, 1500);
@@ -215,7 +215,7 @@ Page({
 
   // 跳转到列表页
   goToList() {
-    wx.reLaunch({
+    wx.redirectTo({
       url: '/pages/list/list'
     });
   },
@@ -227,7 +227,7 @@ Page({
 
   // 跳转到统计页
   goToStatistics() {
-    wx.reLaunch({
+    wx.redirectTo({
       url: '/pages/statistics/statistics'
     });
   }

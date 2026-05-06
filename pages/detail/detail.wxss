@@ -126,3 +126,42 @@
   object-fit: cover;
   border: 1px solid rgba(167, 72, 48, 0.12);
 }
+
+/* 操作区域 */
+.action-card {
+  background-color: #FFF9F3;
+}
+
+.remark-textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 10px;
+  margin-top: 8px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #3D3028;
+  line-height: 1.6;
+  background-color: #F5F0E6;
+  border-radius: 8px;
+  border: 1px solid rgba(167, 72, 48, 0.12);
+  box-sizing: border-box;
+}
+
+.action-btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.action-btn {
+  padding: 10px 32px;
+  background-color: #A74830;
+  color: #FFF9F3;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.action-btn.disabled {
+  opacity: 0.6;
+}

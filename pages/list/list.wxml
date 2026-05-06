@@ -55,6 +55,12 @@
         <view class="issue-location">{{item.location}}</view>
         <view class="issue-time">{{item.createTimeText}}</view>
       </view>
+
+      <!-- 处理反馈 -->
+      <view class="issue-remark" wx:if="{{item.status === 2 }}">
+        <view class="issue-remark-label">处理备注：</view>
+        <view class="issue-remark-text">{{item.remark}}</view>
+      </view>
     </view>
 
     <!-- 加载更多 -->
@@ -94,4 +100,5 @@
       <text class="nav-text">数据统计</text>
     </view>
   </view>
+
 </view>

@@ -144,7 +144,7 @@ Page({
 
   // 跳转到提交页
   goToSubmit() {
-    wx.reLaunch({
+    wx.redirectTo({
       url: '/pages/submit/submit'
     });
   },
@@ -156,7 +156,7 @@ Page({
 
   // 跳转到统计页
   goToStatistics() {
-    wx.reLaunch({
+    wx.redirectTo({
       url: '/pages/statistics/statistics'
     });
   }

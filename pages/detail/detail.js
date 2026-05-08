@@ -7,7 +7,9 @@ Page({
     loading: true,
     loadError: false,
     remarkInput: '',
-    submitting: false
+    submitting: false,
+    deleting: false,
+    isOwner: false
   },
 
   onLoad(options) {
@@ -31,8 +33,6 @@ Page({
         }
       });
 
-      console.log('getIssueDetail返回:', JSON.stringify(res.result));
-
       if (res.result && res.result.errMsg === 'cloud.callFunction:ok' && res.result.data) {
         const issue = res.result.data;
         issue.categoryText = util.getCategoryText(issue.category);
@@ -40,8 +40,13 @@ Page({
         issue.statusClass = util.getStatusClass(issue.status);
         issue.createTimeText = util.formatTime(new Date(issue.createTime));
 
+        // 判断是否为创建人
+        const app = getApp();
+        const isOwner = issue.userId === app.globalData.openid;
+
         this.setData({
           issue,
+          isOwner,
           loading: false
         });
       } else {
@@ -102,7 +107,7 @@ Page({
         this.loadDetail();
       } else {
         wx.showToast({
-          title: res.result.errMsg || '处理失败',
+          title: res.result.error || '处理失败',
           icon: 'none'
         });
       }
@@ -112,5 +117,43 @@ Page({
     } finally {
       this.setData({ submitting: false });
     }
+  },
+
+  // 删除问题
+  deleteIssue() {
+    wx.showModal({
+      title: '确认删除',
+      content: '删除后不可恢复，确定要删除此问题吗？',
+      confirmColor: '#A74830',
+      success: async (res) => {
+        if (!res.confirm) return;
+        if (this.data.deleting) return;
+        this.setData({ deleting: true });
+
+        try {
+          const deleteRes = await wx.cloud.callFunction({
+            name: 'deleteIssue',
+            data: { issueId: this.data.issueId }
+          });
+
+          if (deleteRes.result && deleteRes.result.errMsg === 'cloud.callFunction:ok') {
+            wx.showToast({ title: '已删除', icon: 'success' });
+            setTimeout(() => {
+              wx.navigateBack();
+            }, 1500);
+          } else {
+            wx.showToast({
+              title: deleteRes.result.error || '删除失败',
+              icon: 'none'
+            });
+          }
+        } catch (err) {
+          console.error('删除失败', err);
+          wx.showToast({ title: '删除失败，请重试', icon: 'none' });
+        } finally {
+          this.setData({ deleting: false });
+        }
+      }
+    });
   }
 });

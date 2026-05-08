@@ -64,8 +64,8 @@
       </view>
     </view>
 
-    <!-- 已处理操作区域 -->
-    <view class="action-card card" wx:if="{{issue.status === 0}}">
+    <!-- 处理操作区域 - 仅创建人可见 -->
+    <view class="action-card card" wx:if="{{isOwner && issue.status === 0}}">
       <view class="info-label">处理备注</view>
       <textarea
         class="remark-textarea"
@@ -86,6 +86,13 @@
       <view class="info-row">
         <view class="info-label">处理备注</view>
         <view class="info-value description">{{issue.remark}}</view>
+      </view>
+    </view>
+
+    <!-- 删除按钮 - 仅创建人可见 -->
+    <view class="delete-wrapper" wx:if="{{isOwner}}">
+      <view class="delete-btn {{deleting ? 'disabled' : ''}}" bindtap="deleteIssue">
+        {{deleting ? '删除中...' : '删除问题'}}
       </view>
     </view>
   </view>

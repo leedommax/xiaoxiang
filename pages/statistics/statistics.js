@@ -97,6 +97,14 @@ Page({
     }
   },
 
+  // 转发
+  onShareAppMessage() {
+    return {
+      title: '橡树湾·邻里 - 统计概览',
+      path: '/pages/statistics/statistics'
+    };
+  },
+
   // 跳转到提交页
   goToSubmit() {
     wx.redirectTo({

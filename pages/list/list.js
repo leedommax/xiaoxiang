@@ -134,6 +134,14 @@ Page({
     }
   },
 
+  // 转发
+  onShareAppMessage() {
+    return {
+      title: '橡树湾·邻里 - 问题反馈',
+      path: '/pages/list/list'
+    };
+  },
+
   // 跳转到详情页
   goToDetail(e) {
     const id = e.currentTarget.dataset.id;

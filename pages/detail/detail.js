@@ -119,6 +119,14 @@ Page({
     }
   },
 
+  // 转发
+  onShareAppMessage() {
+    return {
+      title: `${this.data.issue.categoryText} - ${this.data.issue.statusText}`,
+      path: `/pages/detail/detail?id=${this.data.issueId}`
+    };
+  },
+
   // 删除问题
   deleteIssue() {
     wx.showModal({

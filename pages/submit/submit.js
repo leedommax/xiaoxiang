@@ -213,6 +213,14 @@ Page({
     }
   },
 
+  // 转发
+  onShareAppMessage() {
+    return {
+      title: '橡树湾·邻里 - 问题反馈',
+      path: '/pages/submit/submit'
+    };
+  },
+
   // 跳转到列表页
   goToList() {
     wx.redirectTo({

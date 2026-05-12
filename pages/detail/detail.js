@@ -119,11 +119,19 @@ Page({
     }
   },
 
-  // 转发
+  // 转发到聊天
   onShareAppMessage() {
     return {
       title: `${this.data.issue.categoryText} - ${this.data.issue.statusText}`,
       path: `/pages/detail/detail?id=${this.data.issueId}`
+    };
+  },
+
+  // 分享到朋友圈
+  onShareTimeline() {
+    return {
+      title: `${this.data.issue.categoryText} - ${this.data.issue.statusText}`,
+      query: `id=${this.data.issueId}`
     };
   },
 

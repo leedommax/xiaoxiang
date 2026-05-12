@@ -97,11 +97,18 @@ Page({
     }
   },
 
-  // 转发
+  // 转发到聊天
   onShareAppMessage() {
     return {
       title: '橡树湾·邻里 - 统计概览',
       path: '/pages/statistics/statistics'
+    };
+  },
+
+  // 分享到朋友圈
+  onShareTimeline() {
+    return {
+      title: '橡树湾·邻里 - 统计概览'
     };
   },
 

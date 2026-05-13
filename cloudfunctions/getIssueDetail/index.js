@@ -7,6 +7,7 @@ cloud.init({
 
 const db = cloud.database()
 const issuesCollection = db.collection('issues')
+const likesCollection = db.collection('likes')
 
 // 云函数入口函数
 exports.main = async (event, context) => {
@@ -21,10 +22,21 @@ exports.main = async (event, context) => {
 
     // 查询问题详情
     const result = await issuesCollection.doc(issueId).get()
+    const issue = result.data
+
+    // 查询当前用户是否已点赞
+    const openid = wxContext.OPENID
+    const likeResult = await likesCollection.where({
+      issueId: issueId,
+      userId: openid
+    }).get()
+
+    issue.likeCount = issue.likeCount || 0
+    issue.liked = likeResult.data.length > 0
 
     return {
       errMsg: 'cloud.callFunction:ok',
-      data: result.data
+      data: issue
     }
   } catch (err) {
     console.error('获取问题详情失败', err)

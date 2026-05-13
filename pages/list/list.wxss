@@ -60,6 +60,33 @@
   border: 1px solid #A74830;
 }
 
+/* 分期筛选 */
+.phase-filter {
+  display: flex;
+  background-color: #FFF9F3;
+  padding: 0 16px 12px 16px;
+  gap: 8px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.phase-filter-item {
+  padding: 6px 12px;
+  font-size: 13px;
+  color: #6B5B4F;
+  border-radius: 12px;
+  background-color: #F5F0E6;
+  flex-shrink: 0;
+  border: 1px solid rgba(167, 72, 48, 0.12);
+  transition: all 0.3s ease;
+}
+
+.phase-filter-item.active {
+  background-color: #A74830;
+  color: #FFF9F3;
+  border: 1px solid #A74830;
+}
+
 /* 问题列表 */
 .issue-list {
   padding: 16px 16px 8px 16px;
@@ -140,6 +167,58 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   margin-right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.location-tag {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background-color: rgba(167, 72, 48, 0.1);
+  color: #A74830;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+.issue-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.like-btn {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 6px;
+  border-radius: 12px;
+  background-color: #F5F0E6;
+  transition: all 0.2s ease;
+}
+
+.like-btn.liked {
+  background-color: rgba(167, 72, 48, 0.1);
+}
+
+.like-icon {
+  font-size: 13px;
+  line-height: 1;
+}
+
+.like-btn.liked .like-icon {
+  color: #A74830;
+}
+
+.like-count {
+  font-size: 11px;
+  color: #9B8B7A;
+}
+
+.like-btn.liked .like-count {
+  color: #A74830;
 }
 
 .issue-time {

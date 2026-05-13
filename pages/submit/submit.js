@@ -13,6 +13,14 @@ Page({
     selectedCategory: '',
     description: '',
     imageList: [],
+    phases: [
+      { label: '一期西区', value: '一期西区' },
+      { label: '一期东区', value: '一期东区' },
+      { label: '二期', value: '二期' },
+      { label: '三期', value: '三期' }
+    ],
+    selectedPhase: '',
+    buildingNo: '',
     location: '',
     urgency: 0,
     submitting: false
@@ -85,6 +93,21 @@ Page({
     });
   },
 
+  // 选择分期
+  selectPhase(e) {
+    const value = e.currentTarget.dataset.value;
+    this.setData({
+      selectedPhase: value
+    });
+  },
+
+  // 楼号输入
+  onBuildingNoInput(e) {
+    this.setData({
+      buildingNo: e.detail.value
+    });
+  },
+
   // 位置信息输入
   onLocationInput(e) {
     this.setData({
@@ -116,9 +139,16 @@ Page({
       });
       return false;
     }
+    if (!this.data.selectedPhase) {
+      wx.showToast({
+        title: '请选择分期',
+        icon: 'none'
+      });
+      return false;
+    }
     if (!this.data.location.trim()) {
       wx.showToast({
-        title: '请输入位置信息',
+        title: '请输入详细位置',
         icon: 'none'
       });
       return false;
@@ -172,7 +202,9 @@ Page({
           category: this.data.selectedCategory,
           description: this.data.description,
           images: cloudImageIds,
-          location: this.data.location,
+          phase: this.data.selectedPhase,
+          buildingNo: this.data.buildingNo.trim(),
+          location: this.data.location.trim(),
           urgency: this.data.urgency
         }
       });

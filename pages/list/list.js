@@ -10,6 +10,14 @@ Page({
       { label: '已完成', value: '2' }
     ],
     activeStatus: '',
+    phases: [
+      { label: '全部', value: '' },
+      { label: '一期西区', value: '一期西区' },
+      { label: '一期东区', value: '一期东区' },
+      { label: '二期', value: '二期' },
+      { label: '三期', value: '三期' }
+    ],
+    activePhase: '',
     issueList: [],
     page: 0,
     pageSize: 20,
@@ -63,6 +71,7 @@ Page({
         data: {
           filter: this.data.activeTab,
           status: this.data.activeStatus,
+          phase: this.data.activePhase,
           page: this.data.page,
           pageSize: this.data.pageSize
         }
@@ -115,7 +124,8 @@ Page({
     if (tab !== this.data.activeTab) {
       this.setData({
         activeTab: tab,
-        activeStatus: ''
+        activeStatus: '',
+        activePhase: ''
       }, () => {
         this.refreshList();
       });
@@ -131,6 +141,58 @@ Page({
       }, () => {
         this.refreshList();
       });
+    }
+  },
+
+  // 分期筛选
+  filterByPhase(e) {
+    const phase = e.currentTarget.dataset.phase;
+    if (phase !== this.data.activePhase) {
+      this.setData({
+        activePhase: phase
+      }, () => {
+        this.refreshList();
+      });
+    }
+  },
+
+  // 点赞/取消点赞
+  async toggleLike(e) {
+    const id = e.currentTarget.dataset.id;
+    const index = this.data.issueList.findIndex(item => item._id === id);
+    if (index === -1) return;
+
+    const item = this.data.issueList[index];
+    const wasLiked = item.liked;
+
+    // 乐观更新
+    const updateKey = `issueList[${index}]`;
+    this.setData({
+      [`${updateKey}.liked`]: !wasLiked,
+      [`${updateKey}.likeCount`]: wasLiked ? item.likeCount - 1 : item.likeCount + 1
+    });
+
+    try {
+      const res = await wx.cloud.callFunction({
+        name: 'toggleLike',
+        data: { issueId: id }
+      });
+
+      if (!res.result || res.result.errMsg !== 'cloud.callFunction:ok') {
+        // 回滚
+        this.setData({
+          [`${updateKey}.liked`]: wasLiked,
+          [`${updateKey}.likeCount`]: item.likeCount
+        });
+        wx.showToast({ title: '操作失败', icon: 'none' });
+      }
+    } catch (err) {
+      // 回滚
+      this.setData({
+        [`${updateKey}.liked`]: wasLiked,
+        [`${updateKey}.likeCount`]: item.likeCount
+      });
+      wx.showToast({ title: '操作失败', icon: 'none' });
     }
   },
 

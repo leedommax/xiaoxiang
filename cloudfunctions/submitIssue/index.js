@@ -21,6 +21,8 @@ exports.main = async (event, context) => {
       category,
       description,
       images,
+      phase,
+      buildingNo,
       location,
       urgency
     } = event
@@ -36,10 +38,10 @@ exports.main = async (event, context) => {
       return { errMsg: 'cloud.callFunction:fail', error: '问题描述不能超过500字' }
     }
     if (!location || location.trim().length === 0) {
-      return { errMsg: 'cloud.callFunction:fail', error: '请输入位置信息' }
+      return { errMsg: 'cloud.callFunction:fail', error: '请输入详细位置' }
     }
-    if (location.length > 100) {
-      return { errMsg: 'cloud.callFunction:fail', error: '位置信息不能超过100字' }
+    if (!phase || phase.trim().length === 0) {
+      return { errMsg: 'cloud.callFunction:fail', error: '请选择分期' }
     }
     if (urgency !== undefined && ![0, 1].includes(urgency)) {
       return { errMsg: 'cloud.callFunction:fail', error: '紧急程度不合法' }
@@ -74,6 +76,8 @@ exports.main = async (event, context) => {
       category: category,
       description: description.trim(),
       images: images || [],
+      phase: phase.trim(),
+      buildingNo: buildingNo.trim(),
       location: location.trim(),
       urgency: urgency || 0,
       status: 0,

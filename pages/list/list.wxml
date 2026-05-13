@@ -22,6 +22,19 @@
     </view>
   </view>
 
+  <!-- 分期筛选 -->
+  <view class="phase-filter">
+    <view
+      wx:for="{{phases}}"
+      wx:key="value"
+      class="phase-filter-item {{activePhase === item.value ? 'active' : ''}}"
+      bindtap="filterByPhase"
+      data-phase="{{item.value}}"
+    >
+      {{item.label}}
+    </view>
+  </view>
+
   <!-- 问题列表 -->
   <view class="issue-list">
     <view
@@ -52,8 +65,18 @@
       </view>
 
       <view class="issue-footer">
-        <view class="issue-location">{{item.location}}</view>
-        <view class="issue-time">{{item.createTimeText}}</view>
+        <view class="issue-location">
+          <text wx:if="{{item.phase}}" class="location-tag">{{item.phase}}</text>
+          <text wx:if="{{item.buildingNo}}" class="location-tag">{{item.buildingNo}}号楼</text>
+          <text>{{item.location}}</text>
+        </view>
+        <view class="issue-footer-right">
+          <view class="like-btn {{item.liked ? 'liked' : ''}}" catchtap="toggleLike" data-id="{{item._id}}">
+            <text class="like-icon">{{item.liked ? '❤' : '♡'}}</text>
+            <text class="like-count">{{item.likeCount || 0}}</text>
+          </view>
+          <view class="issue-time">{{item.createTimeText}}</view>
+        </view>
       </view>
 
       <!-- 处理反馈 -->

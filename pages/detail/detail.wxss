@@ -127,6 +127,47 @@
   border: 1px solid rgba(167, 72, 48, 0.12);
 }
 
+/* 点赞区域 */
+.like-area {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(167, 72, 48, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+.like-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background-color: #F5F0E6;
+  transition: all 0.2s ease;
+}
+
+.like-btn.liked {
+  background-color: rgba(167, 72, 48, 0.1);
+}
+
+.like-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.like-btn.liked .like-icon {
+  color: #A74830;
+}
+
+.like-text {
+  font-size: 13px;
+  color: #9B8B7A;
+}
+
+.like-btn.liked .like-text {
+  color: #A74830;
+}
+
 /* 操作区域 */
 .action-card {
   background-color: #FFF9F3;

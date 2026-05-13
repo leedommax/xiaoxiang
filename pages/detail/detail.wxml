@@ -48,8 +48,18 @@
         </view>
       </view>
 
+      <view class="info-row" wx:if="{{issue.phase}}">
+        <view class="info-label">所属分期</view>
+        <view class="info-value">{{issue.phase}}</view>
+      </view>
+
+      <view class="info-row" wx:if="{{issue.buildingNo}}">
+        <view class="info-label">楼号</view>
+        <view class="info-value">{{issue.buildingNo}}号楼</view>
+      </view>
+
       <view class="info-row">
-        <view class="info-label">位置信息</view>
+        <view class="info-label">详细位置</view>
         <view class="info-value">{{issue.location}}</view>
       </view>
 
@@ -61,6 +71,14 @@
       <view class="info-row" wx:if="{{issue.userName}}">
         <view class="info-label">提交人</view>
         <view class="info-value">{{issue.userName}}</view>
+      </view>
+
+      <!-- 点赞区域 -->
+      <view class="like-area">
+        <view class="like-btn {{issue.liked ? 'liked' : ''}}" bindtap="toggleLike">
+          <text class="like-icon">{{issue.liked ? '❤' : '♡'}}</text>
+          <text class="like-text">{{issue.likeCount || 0}}人点赞</text>
+        </view>
       </view>
     </view>
 

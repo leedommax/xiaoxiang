@@ -119,6 +119,42 @@ Page({
     }
   },
 
+  // 点赞/取消点赞
+  async toggleLike() {
+    if (!this.data.issue) return;
+    const wasLiked = this.data.issue.liked;
+    const oldCount = this.data.issue.likeCount || 0;
+
+    // 乐观更新
+    this.setData({
+      'issue.liked': !wasLiked,
+      'issue.likeCount': wasLiked ? oldCount - 1 : oldCount + 1
+    });
+
+    try {
+      const res = await wx.cloud.callFunction({
+        name: 'toggleLike',
+        data: { issueId: this.data.issueId }
+      });
+
+      if (!res.result || res.result.errMsg !== 'cloud.callFunction:ok') {
+        // 回滚
+        this.setData({
+          'issue.liked': wasLiked,
+          'issue.likeCount': oldCount
+        });
+        wx.showToast({ title: '操作失败', icon: 'none' });
+      }
+    } catch (err) {
+      // 回滚
+      this.setData({
+        'issue.liked': wasLiked,
+        'issue.likeCount': oldCount
+      });
+      wx.showToast({ title: '操作失败', icon: 'none' });
+    }
+  },
+
   // 转发到聊天
   onShareAppMessage() {
     return {

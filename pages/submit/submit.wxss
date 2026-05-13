@@ -170,6 +170,34 @@
   box-sizing: border-box;
 }
 
+/* 分期选择 */
+.phase-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.phase-item {
+  padding: 8px 16px;
+  border-radius: 12px;
+  background-color: #F5F0E6;
+  color: #6B5B4F;
+  font-size: 13px;
+  border: 1px solid rgba(167, 72, 48, 0.12);
+  transition: all 0.3s ease;
+}
+
+.phase-item.active {
+  background-color: #A74830;
+  color: #FFF9F3;
+  border: 1px solid #A74830;
+}
+
+.building-input {
+  margin-bottom: 10px;
+}
+
 /* 提交按钮 */
 .submit-btn-container {
   margin-top: 24px;

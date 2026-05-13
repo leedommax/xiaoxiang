@@ -15,9 +15,7 @@ Page({
     imageList: [],
     phases: [
       { label: '一期西区', value: '一期西区' },
-      { label: '一期东区', value: '一期东区' },
-      { label: '二期', value: '二期' },
-      { label: '三期', value: '三期' }
+      { label: '一期东区', value: '一期东区' }
     ],
     selectedPhase: '',
     buildingNo: '',
